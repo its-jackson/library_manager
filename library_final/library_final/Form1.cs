@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Excel;
+using System;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text;
 using System.Windows.Forms;
@@ -15,15 +17,12 @@ namespace library_final
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            viewAllMembers();
+            viewAllRentals();
+            viewAllBooks();
         }
 
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void viewMembersToolStripMenuItem_Click(object sender, EventArgs e)
+        private void viewAllMembers()
         {
             try
             {
@@ -31,26 +30,16 @@ namespace library_final
                 {
                     connection.Open();
                     StringBuilder sb = new StringBuilder();
-                    sb.Append("SELECT first_name, last_name, phone_number, email, home_address ");
+                    sb.Append("SELECT * ");
                     sb.Append("FROM library_members;");
                     String sql = sb.ToString();
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            listView1.Items.Clear();
-                            while (reader.Read())
-                            {
-                                StringBuilder formatString = new StringBuilder();
-                                formatString.Append(reader.GetString(0) + " ");
-                                formatString.Append(reader.GetString(1) + " ");
-                                formatString.Append(reader.GetString(2) + " ");
-                                formatString.Append(reader.GetString(3) + " ");
-                                formatString.Append(reader.GetString(4) + " ");
-                                listView1.Items.Add(formatString.ToString());
-                            }
-                        }
+                        System.Data.DataTable table = new System.Data.DataTable();
+                        SqlDataAdapter sda = new SqlDataAdapter(command);
+                        sda.Fill(table);
+                        dataGridView1.DataSource = table;
                     }
                     connection.Close();
                 }
@@ -59,93 +48,84 @@ namespace library_final
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
+
+        private void viewAllRentals()
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(azure))
+                {
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("SELECT * ");
+                    sb.Append("FROM library_book_rentals;");
+                    String sql = sb.ToString();
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        System.Data.DataTable table = new System.Data.DataTable();
+                        SqlDataAdapter sda = new SqlDataAdapter(command);
+                        sda.Fill(table);
+                        dataGridView2.DataSource = table;
+                    }
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+        }
+
+        private void viewAllBooks()
+        {
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(azure))
+                {
+                    connection.Open();
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("SELECT * ");
+                    sb.Append("FROM library;");
+                    String sql = sb.ToString();
+
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        System.Data.DataTable table = new System.Data.DataTable();
+                        SqlDataAdapter sda = new SqlDataAdapter(command);
+                        sda.Fill(table);
+                        dataGridView3.DataSource = table;
+                    }
+                    connection.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+        }
+
+        private void viewMembersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            viewAllMembers();
+        }
+
+        private void viewBookRentalsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            viewAllRentals();
+        }
+
+        private void viewAllBooksToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            viewAllBooks();
         }
 
         private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form2 form2 = new Form2();
             form2.Show();
-        }
-
-        private void viewBookRentalsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(azure))
-                {
-                    connection.Open();
-                    StringBuilder sb = new StringBuilder();
-                    sb.Append("SELECT book_name, book_author, start_date, return_date ");
-                    sb.Append("FROM library_book_rentals;");
-                    String sql = sb.ToString();
-
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            listView2.Items.Clear();
-                            while (reader.Read())
-                            {
-                                StringBuilder formatString = new StringBuilder();
-                                formatString.Append(reader.GetString(0) + " ");
-                                formatString.Append(reader.GetString(1) + " ");
-                                formatString.Append(reader.GetDateTime(2) + " ");
-                                formatString.Append(reader.GetDateTime(3) + " ");
-
-                                listView2.Items.Add(formatString.ToString());
-                            }
-                        }
-                    }
-                    connection.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-
-        }
-
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void viewAllBooksToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                using (SqlConnection connection = new SqlConnection(azure))
-                {
-                    connection.Open();
-                    StringBuilder sb = new StringBuilder();
-                    sb.Append("SELECT book_name, book_author, book_genre ");
-                    sb.Append("FROM library;");
-                    String sql = sb.ToString();
-
-                    using (SqlCommand command = new SqlCommand(sql, connection))
-                    {
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            listView3.Items.Clear();
-                            while (reader.Read())
-                            {
-                                StringBuilder formatString = new StringBuilder();
-                                formatString.Append(reader.GetString(0) + " ");
-                                formatString.Append(reader.GetString(1) + " ");
-                                formatString.Append(reader.GetString(2) + " ");
-                                listView3.Items.Add(formatString.ToString());
-                            }
-                        }
-                    }
-                    connection.Close();
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-
         }
 
         private void insertNewMemberToolStripMenuItem_Click(object sender, EventArgs e)
@@ -207,7 +187,144 @@ namespace library_final
             /* creds to this guy for teaching me how to do this:
             * www.stackoverflow.com/questions/4580263/how-to-open-in-default-browser-in-c-sharp
             */
-            System.Diagnostics.Process.Start("https://github.com");
+            System.Diagnostics.Process.Start("https://github.com/its-jackson/library_manager");
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // creating Excel Application  
+                Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+                // creating new WorkBook within Excel application  
+                Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
+                // creating new Excelsheet in workbook  
+                Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+                // see the excel sheet behind the program  
+                app.Visible = true;
+                // get the reference of first sheet. By default its name is Sheet1.  
+                // store its reference to worksheet  
+                worksheet = workbook.Sheets["Sheet1"];
+                worksheet = workbook.ActiveSheet;
+                // changing the name of active sheet  
+                worksheet.Name = "Exported from gridview";    //current sheet name
+                                                              // storing header part in Excel  
+                for (int i = 1; i < dataGridView1.Columns.Count + 1; i++)
+                {
+                    worksheet.Cells[1, i] = dataGridView1.Columns[i - 1].HeaderText;
+                }
+                // storing Each row and column value to excel sheet  
+                for (int i = 0; i < dataGridView1.Rows.Count - 1; i++)  //Row 
+                {
+                    for (int j = 0; j < dataGridView1.Columns.Count; j++) //Column
+                    {
+                        worksheet.Cells[i + 2, j + 1] = dataGridView1.Rows[i].Cells[j].Value.ToString();
+                    }
+                }
+                // save the application == file name 
+                workbook.SaveAs("d:\\output.xls", Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+            } 
+            catch (Exception ex)
+            {
+                // MessageBox.Show(ex.ToString());
+            }
+
+        }
+
+        private void btnExportRentals_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // creating Excel Application  
+                Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+                // creating new WorkBook within Excel application  
+                Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
+                // creating new Excelsheet in workbook  
+                Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+                // see the excel sheet behind the program  
+                app.Visible = true;
+                // get the reference of first sheet. By default its name is Sheet1.  
+                // store its reference to worksheet  
+                worksheet = workbook.Sheets["Sheet1"];
+                worksheet = workbook.ActiveSheet;
+                // changing the name of active sheet  
+                worksheet.Name = "Exported from gridview";    //current sheet name
+                                                              // storing header part in Excel  
+                for (int i = 1; i < dataGridView2.Columns.Count + 1; i++)
+                {
+                    worksheet.Cells[1, i] = dataGridView2.Columns[i - 1].HeaderText;
+                }
+                // storing Each row and column value to excel sheet  
+                for (int i = 0; i < dataGridView2.Rows.Count - 1; i++)  //Row 
+                {
+                    for (int j = 0; j < dataGridView2.Columns.Count; j++) //Column
+                    {
+                        worksheet.Cells[i + 2, j + 1] = dataGridView2.Rows[i].Cells[j].Value.ToString();
+                    }
+                }
+                // save the application == file name 
+                workbook.SaveAs("d:\\output.xls", Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+            }
+            catch (Exception ex)
+            {
+                
+            }
+           
+        }
+
+        private void btnExportBooks_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // creating Excel Application  
+                Microsoft.Office.Interop.Excel._Application app = new Microsoft.Office.Interop.Excel.Application();
+                // creating new WorkBook within Excel application  
+                Microsoft.Office.Interop.Excel._Workbook workbook = app.Workbooks.Add(Type.Missing);
+                // creating new Excelsheet in workbook  
+                Microsoft.Office.Interop.Excel._Worksheet worksheet = null;
+                // see the excel sheet behind the program  
+                app.Visible = true;
+                // get the reference of first sheet. By default its name is Sheet1.  
+                // store its reference to worksheet  
+                worksheet = workbook.Sheets["Sheet1"];
+                worksheet = workbook.ActiveSheet;
+                // changing the name of active sheet  
+                worksheet.Name = "Exported from gridview";    //current sheet name
+                                                              // storing header part in Excel  
+                for (int i = 1; i < dataGridView3.Columns.Count + 1; i++)
+                {
+                    worksheet.Cells[1, i] = dataGridView3.Columns[i - 1].HeaderText;
+                }
+                // storing Each row and column value to excel sheet  
+                for (int i = 0; i < dataGridView3.Rows.Count - 1; i++)  //Row 
+                {
+                    for (int j = 0; j < dataGridView3.Columns.Count; j++) //Column
+                    {
+                        worksheet.Cells[i + 2, j + 1] = dataGridView3.Rows[i].Cells[j].Value.ToString();
+                    }
+                }
+                // save the application == file name 
+                workbook.SaveAs("d:\\output.xls", Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
+            }
+            catch (Exception ex)
+            {
+
+            }
+        }
+
+        private void btnRefreshRentals_Click(object sender, EventArgs e)
+        {
+            viewAllRentals();
+        }
+
+        private void btnRefreshBooks_Click(object sender, EventArgs e)
+        {
+            viewAllBooks();
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            viewAllMembers();
         }
     }
 }

@@ -89,7 +89,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form11";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form11";
+            this.Text = "Delete Book";
             this.ResumeLayout(false);
             this.PerformLayout();
 

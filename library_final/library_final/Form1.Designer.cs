@@ -48,18 +48,27 @@
             this.label1 = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnExport = new System.Windows.Forms.Button();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.listView2 = new System.Windows.Forms.ListView();
+            this.btnRefreshRentals = new System.Windows.Forms.Button();
+            this.btnExportRentals = new System.Windows.Forms.Button();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.listView3 = new System.Windows.Forms.ListView();
+            this.btnRefreshBooks = new System.Windows.Forms.Button();
+            this.btnExportBooks = new System.Windows.Forms.Button();
+            this.dataGridView3 = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.menuStrip1.SuspendLayout();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.tabPage2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -75,7 +84,6 @@
             this.menuStrip1.Size = new System.Drawing.Size(800, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // libraryMembersToolStripMenuItem
             // 
@@ -130,28 +138,28 @@
             // viewBookRentalsToolStripMenuItem
             // 
             this.viewBookRentalsToolStripMenuItem.Name = "viewBookRentalsToolStripMenuItem";
-            this.viewBookRentalsToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.viewBookRentalsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.viewBookRentalsToolStripMenuItem.Text = "View Book Rentals";
             this.viewBookRentalsToolStripMenuItem.Click += new System.EventHandler(this.viewBookRentalsToolStripMenuItem_Click);
             // 
             // rentABookToolStripMenuItem
             // 
             this.rentABookToolStripMenuItem.Name = "rentABookToolStripMenuItem";
-            this.rentABookToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.rentABookToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.rentABookToolStripMenuItem.Text = "Rent Book";
             this.rentABookToolStripMenuItem.Click += new System.EventHandler(this.rentABookToolStripMenuItem_Click);
             // 
             // updateBookRentalToolStripMenuItem
             // 
             this.updateBookRentalToolStripMenuItem.Name = "updateBookRentalToolStripMenuItem";
-            this.updateBookRentalToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.updateBookRentalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.updateBookRentalToolStripMenuItem.Text = "Update Book Rental";
             this.updateBookRentalToolStripMenuItem.Click += new System.EventHandler(this.updateBookRentalToolStripMenuItem_Click);
             // 
             // deleteBookRentalToolStripMenuItem
             // 
             this.deleteBookRentalToolStripMenuItem.Name = "deleteBookRentalToolStripMenuItem";
-            this.deleteBookRentalToolStripMenuItem.Size = new System.Drawing.Size(178, 22);
+            this.deleteBookRentalToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.deleteBookRentalToolStripMenuItem.Text = "Delete Book Rental";
             this.deleteBookRentalToolStripMenuItem.Click += new System.EventHandler(this.deleteBookRentalToolStripMenuItem_Click);
             // 
@@ -191,7 +199,7 @@
             // 
             this.removeABookToolStripMenuItem.Name = "removeABookToolStripMenuItem";
             this.removeABookToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.removeABookToolStripMenuItem.Text = "Remove Book";
+            this.removeABookToolStripMenuItem.Text = "Delete Book";
             this.removeABookToolStripMenuItem.Click += new System.EventHandler(this.removeABookToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem
@@ -224,7 +232,9 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.listView1);
+            this.tabPage1.Controls.Add(this.btnRefresh);
+            this.tabPage1.Controls.Add(this.btnExport);
+            this.tabPage1.Controls.Add(this.dataGridView1);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -233,20 +243,40 @@
             this.tabPage1.Text = "View Members";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // listView1
+            // btnRefresh
             // 
-            this.listView1.HideSelection = false;
-            this.listView1.LabelEdit = true;
-            this.listView1.Location = new System.Drawing.Point(6, 6);
-            this.listView1.Name = "listView1";
-            this.listView1.ShowGroups = false;
-            this.listView1.Size = new System.Drawing.Size(749, 295);
-            this.listView1.TabIndex = 3;
-            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.btnRefresh.Location = new System.Drawing.Point(110, 271);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(75, 30);
+            this.btnRefresh.TabIndex = 5;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // btnExport
+            // 
+            this.btnExport.Location = new System.Drawing.Point(6, 271);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(98, 30);
+            this.btnExport.TabIndex = 5;
+            this.btnExport.Text = "Export To Excel";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(6, 6);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.Size = new System.Drawing.Size(749, 259);
+            this.dataGridView1.TabIndex = 4;
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.listView2);
+            this.tabPage2.Controls.Add(this.btnRefreshRentals);
+            this.tabPage2.Controls.Add(this.btnExportRentals);
+            this.tabPage2.Controls.Add(this.dataGridView2);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
@@ -254,21 +284,41 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "View Book Rentals";
             this.tabPage2.UseVisualStyleBackColor = true;
-            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
-            // listView2
+            // btnRefreshRentals
             // 
-            this.listView2.HideSelection = false;
-            this.listView2.LabelEdit = true;
-            this.listView2.Location = new System.Drawing.Point(6, 6);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(749, 295);
-            this.listView2.TabIndex = 5;
-            this.listView2.UseCompatibleStateImageBehavior = false;
+            this.btnRefreshRentals.Location = new System.Drawing.Point(110, 271);
+            this.btnRefreshRentals.Name = "btnRefreshRentals";
+            this.btnRefreshRentals.Size = new System.Drawing.Size(75, 30);
+            this.btnRefreshRentals.TabIndex = 9;
+            this.btnRefreshRentals.Text = "Refresh";
+            this.btnRefreshRentals.UseVisualStyleBackColor = true;
+            this.btnRefreshRentals.Click += new System.EventHandler(this.btnRefreshRentals_Click);
+            // 
+            // btnExportRentals
+            // 
+            this.btnExportRentals.Location = new System.Drawing.Point(6, 271);
+            this.btnExportRentals.Name = "btnExportRentals";
+            this.btnExportRentals.Size = new System.Drawing.Size(98, 30);
+            this.btnExportRentals.TabIndex = 8;
+            this.btnExportRentals.Text = "Export To Excel";
+            this.btnExportRentals.UseVisualStyleBackColor = true;
+            this.btnExportRentals.Click += new System.EventHandler(this.btnExportRentals_Click);
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Location = new System.Drawing.Point(6, 6);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.Size = new System.Drawing.Size(749, 259);
+            this.dataGridView2.TabIndex = 5;
             // 
             // tabPage3
             // 
-            this.tabPage3.Controls.Add(this.listView3);
+            this.tabPage3.Controls.Add(this.btnRefreshBooks);
+            this.tabPage3.Controls.Add(this.btnExportBooks);
+            this.tabPage3.Controls.Add(this.dataGridView3);
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
@@ -277,15 +327,34 @@
             this.tabPage3.Text = "View Books";
             this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // listView3
+            // btnRefreshBooks
             // 
-            this.listView3.HideSelection = false;
-            this.listView3.LabelEdit = true;
-            this.listView3.Location = new System.Drawing.Point(6, 6);
-            this.listView3.Name = "listView3";
-            this.listView3.Size = new System.Drawing.Size(749, 295);
-            this.listView3.TabIndex = 5;
-            this.listView3.UseCompatibleStateImageBehavior = false;
+            this.btnRefreshBooks.Location = new System.Drawing.Point(110, 271);
+            this.btnRefreshBooks.Name = "btnRefreshBooks";
+            this.btnRefreshBooks.Size = new System.Drawing.Size(75, 30);
+            this.btnRefreshBooks.TabIndex = 8;
+            this.btnRefreshBooks.Text = "Refresh";
+            this.btnRefreshBooks.UseVisualStyleBackColor = true;
+            this.btnRefreshBooks.Click += new System.EventHandler(this.btnRefreshBooks_Click);
+            // 
+            // btnExportBooks
+            // 
+            this.btnExportBooks.Location = new System.Drawing.Point(6, 271);
+            this.btnExportBooks.Name = "btnExportBooks";
+            this.btnExportBooks.Size = new System.Drawing.Size(98, 30);
+            this.btnExportBooks.TabIndex = 7;
+            this.btnExportBooks.Text = "Export To Excel";
+            this.btnExportBooks.UseVisualStyleBackColor = true;
+            this.btnExportBooks.Click += new System.EventHandler(this.btnExportBooks_Click);
+            // 
+            // dataGridView3
+            // 
+            this.dataGridView3.BackgroundColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.dataGridView3.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView3.Location = new System.Drawing.Point(6, 6);
+            this.dataGridView3.Name = "dataGridView3";
+            this.dataGridView3.Size = new System.Drawing.Size(749, 259);
+            this.dataGridView3.TabIndex = 5;
             // 
             // label2
             // 
@@ -329,8 +398,11 @@
             this.menuStrip1.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.tabPage2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -360,11 +432,17 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ListView listView3;
-        private System.Windows.Forms.ListView listView2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.Button btnExport;
+        private System.Windows.Forms.DataGridView dataGridView2;
+        private System.Windows.Forms.DataGridView dataGridView3;
+        private System.Windows.Forms.Button btnExportBooks;
+        private System.Windows.Forms.Button btnExportRentals;
+        public System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnRefreshRentals;
+        private System.Windows.Forms.Button btnRefreshBooks;
     }
 }
 
