@@ -159,7 +159,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form7";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Form7";
+            this.Text = "Update Book Rental";
             this.ResumeLayout(false);
             this.PerformLayout();
 

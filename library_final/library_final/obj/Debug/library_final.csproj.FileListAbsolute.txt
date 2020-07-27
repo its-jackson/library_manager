@@ -17,3 +17,4 @@ C:\Users\Jack\source\repos\library_final\library_final\obj\Debug\library_final.c
 C:\Users\Jack\source\repos\library_final\library_final\obj\Debug\library_final.csproj.CoreCompileInputs.cache
 C:\Users\Jack\source\repos\library_final\library_final\obj\Debug\library_final.exe
 C:\Users\Jack\source\repos\library_final\library_final\obj\Debug\library_final.pdb
+C:\Users\Jack\source\repos\library_final\library_final\obj\Debug\library_final.csprojAssemblyReference.cache
